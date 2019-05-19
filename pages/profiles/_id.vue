@@ -1,6 +1,14 @@
 <template lang="html">
   <div>
-    {{ profile }}
+    <b-img :src="profile.photoURL" fluid alt="Responsive image"></b-img>
+    {{ profile.displayName }} さんにゃーんを送ろう
+    <b-button
+      :href="
+        'http://www.twitter.com/messages/compose?recipient_id=' + profile.uid
+      "
+      variant="outline-primary"
+      >にゃーん</b-button
+    >
   </div>
 </template>
 

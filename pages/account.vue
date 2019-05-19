@@ -2,7 +2,6 @@
   <div>
     <!-- ログイン中に表示される画面 -->
     <div v-if="isAuthenticated">
-      {{ user }}
       ログイン中です<br />
       <button @click="logout">ログアウト</button><br />
       <a href="/member-page">メンバーページへ</a>
@@ -34,10 +33,10 @@ export default {
       await firebase
         .auth()
         .signInWithPopup(provider)
-        .then(async user => {
-          await this.addProfile(user)
+        .then(async result => {
+          await this.addProfile(result)
           // ログインしたら飛ぶページを指定
-          // this.$router.push("/member-page")
+          this.$router.push('/profiles/' + result.additionalUserInfo.username)
         })
         .catch(error => {
           alert(error)
@@ -54,12 +53,14 @@ export default {
           alert(error)
         })
     },
-    async addProfile(user) {
+    async addProfile(result) {
+      // eslint-disable-next-line no-console
+      console.log(result)
       await this.$store.dispatch('addProfile', {
-        id: user.uid,
-        uid: user.providerData[0].uid,
-        displayName: user.providerData[0].displayName,
-        photoURL: user.providerData[0].photoURL,
+        uid: result.user.providerData[0].uid,
+        username: result.additionalUserInfo.username,
+        displayName: result.user.providerData[0].displayName,
+        photoURL: result.user.providerData[0].photoURL,
         createdAt: 3000000000
       })
     }
