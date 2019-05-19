@@ -29,12 +29,13 @@ export default {
   },
   methods: {
     ...mapActions(['setUser']),
-    login() {
+    async login() {
       const provider = new firebase.auth.TwitterAuthProvider()
-      firebase
+      await firebase
         .auth()
         .signInWithPopup(provider)
-        .then(user => {
+        .then(async user => {
+          await this.addProfile(user)
           // ログインしたら飛ぶページを指定
           // this.$router.push("/member-page")
         })
@@ -52,6 +53,15 @@ export default {
         .catch(error => {
           alert(error)
         })
+    },
+    async addProfile(user) {
+      await this.$store.dispatch('addProfile', {
+        id: user.uid,
+        uid: user.providerData[0].uid,
+        displayName: user.providerData[0].displayName,
+        photoURL: user.providerData[0].photoURL,
+        createdAt: 3000000000
+      })
     }
   }
 }
