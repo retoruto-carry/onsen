@@ -7,7 +7,6 @@
     <b-collapse id="nav_collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item to="/" exact>
-          <font-awesome-icon :icon="['fas', 'star']" />
           新着
         </b-nav-item>
       </b-navbar-nav>
