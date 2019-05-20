@@ -23,10 +23,10 @@ export const actions = {
     commit('setUser', payload)
   },
   addProfile: firebaseAction(
-    (ctx, { uid, username, displayName, photoURL, createdAt }) => {
+    (ctx, { id, uid, username, displayName, photoURL, createdAt }) => {
       firestore
         .collection('profiles')
-        .doc(`${username}`)
+        .doc(`${id}`)
         .set({
           uid,
           username,

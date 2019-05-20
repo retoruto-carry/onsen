@@ -36,7 +36,7 @@ export default {
         .then(async result => {
           await this.addProfile(result)
           // ログインしたら飛ぶページを指定
-          this.$router.push('/profiles/' + result.additionalUserInfo.username)
+          this.$router.push('/profiles/' + result.user.uid)
         })
         .catch(error => {
           alert(error)
@@ -57,6 +57,7 @@ export default {
       // eslint-disable-next-line no-console
       console.log(result)
       await this.$store.dispatch('addProfile', {
+        id: result.user.uid,
         uid: result.user.providerData[0].uid,
         username: result.additionalUserInfo.username,
         displayName: result.user.providerData[0].displayName,

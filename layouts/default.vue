@@ -1,7 +1,9 @@
 <template>
   <div>
     <navigation-bar />
-    <nuxt />
+    <div class="container">
+      <nuxt />
+    </div>
   </div>
 </template>
 
@@ -27,11 +29,14 @@ html {
 }
 
 .container {
-  margin: 20px auto 0;
-  min-height: 100vh;
-  display: flex;
-  text-align: center;
+  margin-top: 30px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
+
 *,
 *:before,
 *:after {
